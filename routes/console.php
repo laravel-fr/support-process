@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -14,6 +14,20 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+Artisan::command('seed-users', function () {
+
+    $pool = Process::pool(function ($pool) {
+        $pool->command('php artisan db:seed');
+        $pool->command('php artisan db:seed');
+        $pool->command('php artisan db:seed');
+        $pool->command('php artisan db:seed');
+        $pool->command('php artisan db:seed');
+        $pool->command('php artisan db:seed');
+        $pool->command('php artisan db:seed');
+        $pool->command('php artisan db:seed');
+        $pool->command('php artisan db:seed');
+        $pool->command('php artisan db:seed');
+    })->start();
+
+    $pool->wait();
+});
