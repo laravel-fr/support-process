@@ -32,7 +32,7 @@ class SendNewsletterPool extends Command
 
         $bar = $this->output->createProgressBar(User::count() / $chunkSize);
 
-        User::chunkById(10_000, function ($users) use ($bar) {
+        User::chunkById($chunkSize, function ($users) use ($bar) {
      
             $chunked = $users->chunk(2000);
      
